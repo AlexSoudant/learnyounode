@@ -2,29 +2,30 @@
 
 var fs = require('fs')
 
-let directory_name = process.argv[2]
-let file_extention = process.argv[3]
-let result = undefined
 
+// function filter_files(){
+//   filtered_result = result.filter( file => 
+//     file.split('.')[1] == file_extention
+//   )
 
-function filter_files(){
-  //console.log(result)
-  filtered_result = result.filter( file => 
-    file.split('.')[1] == file_extention
-  )
-  // console.log(filtered_result[0])
-  // console.log(filtered_result[1])
-  // console.log(filtered_result[2])
-  filtered_result.map(filtered_elem => console.log(filtered_elem))
+//   return filtered_result
 
-}
+// }
 
-function read_dir(path_to_file, callback){
+module.exports = function promise_read_dir(path_to_file, file_extention, callback){
   
   fs.readdir(path_to_file, ( (error, list) => {
-    result = list
-    callback()
+
+    if (error){
+      console.log(error)
+    }
+    let filtered_result = list.filter( file => 
+      file.split('.')[1] == file_extention
+    )
+    return callback(null, filtered_result)
   }))
 }
 
-read_dir(directory_name, filter_files)
+  
+
+
