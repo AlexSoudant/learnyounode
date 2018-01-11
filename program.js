@@ -1,16 +1,14 @@
 
 
-let sum = 0
+const values = process.argv.slice(2)
 
-process.argv.slice(2).forEach((element, index) => {
-  //console.log(index)
-  
-  //if (index > 1){
-    sum += Number(element)
-  //}
+const result = values.reduce((acc, element) => {
 
-})
+  return acc + parseInt(element)
 
-console.log(sum)
+
+}, 0)
+
+console.log(result)
 
 
