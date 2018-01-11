@@ -1,30 +1,17 @@
+const http = require('http')
 
+http.get(process.argv[2], function (response) {
+  response.setEncoding('utf8').on('data', function (data) {
+    console.log(data)
+  })
 
-var fs = require('fs')
+  response.on('error', function (err) {
+    console.log(err)
+  })
+  response.on("end", function(err){
 
-
-// function filter_files(){
-//   filtered_result = result.filter( file => 
-//     file.split('.')[1] == file_extention
-//   )
-
-//   return filtered_result
-
-// }
-
-module.exports = function promise_read_dir(path_to_file, file_extention, callback){
-  
-  fs.readdir(path_to_file, ( (error, list) => {
-
-    if (error){
-      console.log(error)
-    }
-    let filtered_result = list.filter( file => 
-      file.split('.')[1] == file_extention
-    )
-    return callback(null, filtered_result)
-  }))
-}
+  })
+})
 
   
 
