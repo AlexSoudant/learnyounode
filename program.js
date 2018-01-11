@@ -4,7 +4,6 @@ const BufferList = require('bl')
 let URL_to_collect = process.argv[2] 
 let bl = new BufferList()
 let phrase = ""
-const reducer = (accumulator, currentValue) => accumulator + Number(currentValue.toString().length)
 
 http.get(URL_to_collect, function (response) {
   response.setEncoding('utf8').on('data', function (data) {
@@ -23,13 +22,16 @@ http.get(URL_to_collect, function (response) {
     // console.log(bl._bufs.map(buffer => buffer.toString()))
     list_characters = bl._bufs.map(buffer => buffer.toString())
 
-    nb_characters = bl._bufs.reduce(reducer)
+    nb_characters = bl._bufs.reduce((acc, element) => {
+      return acc + element.toString().length
+    }, 0)
 
     console.log(nb_characters)
     phrase = bl._bufs.map(buffer => phrase.concat(buffer.toString()))
     console.log(list_characters.join(' '))
   })
 })
+
 
   
 
