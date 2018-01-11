@@ -28,7 +28,7 @@ http.get(URL_to_collect, function (response) {
 
     console.log(nb_characters)
     phrase = bl._bufs.map(buffer => phrase.concat(buffer.toString()))
-    console.log(list_characters.join(' '))
+    console.log(list_characters.join(''))
   })
 })
 
