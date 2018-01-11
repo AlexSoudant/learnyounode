@@ -1,14 +1,17 @@
-const net = require('net')
-const strftime = require('strftime')
+const http = require('http')
+const fs = require('fs')
 
 const port = process.argv[2]
+const pathFile = process.argv[3]
 
-var server = net.createServer(function (socket) {
+var server = http.createServer(function (req, res) {
   // socket handling logic
-  socket.end(strftime( "%F %R", new Date())+"\n" )
+  console.log('file', pathFile)
+  res.writeHead(200, {'content-type': 'text/plain'})
+  fs.createReadStream(pathFile).pipe(res)
 })
 
-server.listen(port)
+server.listen(parseInt(port))
 
 
 
